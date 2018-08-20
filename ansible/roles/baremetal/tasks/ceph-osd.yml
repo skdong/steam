@@ -1,0 +1,9 @@
+---
+- parted:
+    device: '/dev/{{item}}'
+    label: gpt
+    name: KOLLA_CEPH_OSD_BOOTSTRAP
+    state: present
+    number: 1
+  with_items: "{{ osd_devices[inventory_hostname]['devices'] }}"
+  when:  inventory_hostname in osd_devices

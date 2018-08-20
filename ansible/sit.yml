@@ -1,0 +1,21 @@
+---
+- name: add private key
+  hosts: deployment
+  tasks:
+    - name: Add private key to local
+      copy:
+        dest: '{{ansible_env.HOME}}/.ssh/id_rsa'
+        content: '{{kolla_ssh_key.private_key}}'
+        mode: 0600
+      when: inventory_hostname in groups['deployment']
+
+- name: Apply role baremetal
+  hosts: baremetal
+  gather_facts: no
+  vars:
+    #action: bootstrap-servers
+    action: ceph-osd
+  roles:
+    - { role: baremetal,
+        tags: baremetal }
+
