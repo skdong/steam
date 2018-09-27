@@ -1,0 +1,8 @@
+---
+deploy_host: deploy.stack.slancer
+certs_repo_host: {{deploy_host}}
+ubuntu_repo_host: {{deploy_host}}
+yum_repo_host: {{deploy_host}}
+certs_repo_url: {{certs_repo_host}}/repository/certs
+yum_repo_url: {{yum_repo_host}}/repository/yum
+apt_sources_url: {{deploy_domain}}/repository

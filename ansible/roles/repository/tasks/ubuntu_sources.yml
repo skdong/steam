@@ -1,0 +1,31 @@
+---
+- name: Remove sources
+  file:
+    path: '/etc/apt/sources.list.d'
+    state: absent
+  become: True
+
+- name: Remove source
+  file:
+    path: '/etc/apt/sources.list'
+    state: absent
+  become: True
+
+- name: Makd Sources
+  file:
+    path: '/etc/apt/sources.list.d'
+    state: directory
+    recurse: yes
+  become: True
+
+- name: add apt key
+  apt_key:
+    url: '{{certs_repo_url}}/bjzdgt_ubuntu_2018.pub'
+
+- name: Enable vapor source
+  template:
+    src: vapor_soruces.list.j2
+    dest: /etc/apt/sources.list.d/vapor_sources.list
+
+- name: apt update
+  apt:
