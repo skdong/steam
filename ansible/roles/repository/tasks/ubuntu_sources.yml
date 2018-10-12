@@ -24,8 +24,16 @@
 
 - name: Enable vapor source
   template:
-    src: vapor_soruces.list.j2
-    dest: /etc/apt/sources.list.d/vapor_sources.list
+    src: steam_sources.list.j2
+    dest: /etc/apt/sources.list.d/steam_sources.list
 
-- name: apt update
+- name: update apt
   apt:
+   update_cache: yes
+
+- name: install debian package
+  apt:
+    name: '{{item}}'
+  with_items: '{{debian_pkg_install}}'
+ 
+

@@ -1,2 +1,21 @@
 ---
 
+# The directory to merge custom config files the kolla's config files
+node_custom_config: "/etc/dire/config"
+
+# The project to generate configuration files for
+project: ""
+
+# The directory to store the config files on the destination node
+node_config_directory: "/etc/dire/{{ project }}"
+
+deploy_host: deploy.stack.slancer
+certs_repo_host: '{{deploy_host}}'
+apt_repo_host: '{{deploy_host}}'
+yum_repo_host: '{{deploy_host}}'
+pip_repo_host: '{{deploy_host}}'
+
+certs_repo_url: 'http://{{certs_repo_host}}/repository/certs'
+yum_repo_url: 'http://{{yum_repo_host}}/repository/yum'
+apt_sources_url: 'http://{{apt_repo_host}}/repository'
+pip_repo_url: 'http://{{pip_repo_host}}/repository/pypi/simple'

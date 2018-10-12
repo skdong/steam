@@ -17,3 +17,12 @@
   template:
     src: steam_yum_repo.j2
     dest: /etc/yum.repos.d/steam.repo
+
+- name: yum update
+  yum:
+    update_cache: yes
+
+- name: install rehat package
+  yum:
+    name: '{{item}}'
+  with_items: '{{debian_pkg_install}}'

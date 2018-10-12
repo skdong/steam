@@ -1,8 +1,12 @@
 ---
+python_pkg_install:
+  - docker
+
 debian_pkg_install:
   - git
   - python-pip
 
-redhat_pkg_install:
+redhat_pkg_install: 
   - git
   - python2-pip
+

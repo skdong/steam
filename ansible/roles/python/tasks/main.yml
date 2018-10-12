@@ -1,0 +1,6 @@
+---
+- name: install pip package
+  pip:
+    name: '{{item}}'
+    extra_args: '-i {{pip_repo_url}} --trusted-host {{pip_repo_host}}'
+  with_items: '{{python_pkg_install}}'

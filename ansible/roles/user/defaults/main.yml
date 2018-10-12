@@ -1,0 +1,5 @@
+create_kolla_user: True
+create_kolla_user_sudoers: "{{ create_kolla_user }}"
+
+kolla_user: "dire"
+kolla_group: "dire"
