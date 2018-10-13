@@ -15,7 +15,7 @@ project: ""
 # The "temp" files that are created before merge need to stay persistent due
 # to the fact that ansible will register a "change" if it has to create them
 # again. Persistent files allow for idempotency
-container_config_directory: "/var/lib/dire/config_files"
+container_config_directory: "/var/lib/kolla/config_files"
 
 # The directory to store the config files on the destination node
 node_config_directory: "/etc/dire/{{ project }}"

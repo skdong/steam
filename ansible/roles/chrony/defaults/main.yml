@@ -14,7 +14,7 @@ chrony_services:
       - "kolla_logs:/var/log/kolla"
     dimensions: "{{ chrony_dimensions }}"
 
-chrony_bindaddress: '{{ inventory_hostname }}'
+chrony_bindaddress: '{{ ansible_host }}'
 
 
 ####################

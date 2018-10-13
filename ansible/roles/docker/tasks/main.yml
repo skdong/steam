@@ -54,3 +54,6 @@
     state: started
   with_items:
     - docker
+
+- name: add docker registry cert
+  include: registry.yml

@@ -33,9 +33,11 @@
     #   tags: python }
     #- {role: firewall,
     #   tags: firewall}
+    - {role: ceph,
+        tags: ceph}
     #- {role: docker,
     #    tags: docker}
-    - {role: chrony,
-       tags: chrony}
+    #- {role: chrony,
+    #   tags: chrony}
 
   
