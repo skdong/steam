@@ -46,7 +46,6 @@
     dimensions: "{{ item.value.dimensions }}"
   when:
     - kolla_action != "config"
-    - inventory_hostname in groups[item.value.group]
     - item.value.enabled | bool
   with_dict: "{{ chrony_services }}"
   notify:

@@ -21,9 +21,14 @@ container_config_directory: "/var/lib/dire/config_files"
 node_config_directory: "/etc/dire/{{ project }}"
 
 # Valid options are ['centos', 'debian', 'oraclelinux', 'rhel', 'ubuntu']
-kolla_base_distro: "centos"
+kolla_base_distro: "ubuntu"
 # Valid options are [ binary, source ]
 kolla_install_type: "binary"
+
+# The group which own node_config_directory, you can use a non-root
+# user to deploy kolla
+config_owner_user: "dire"
+config_owner_group: "dire"
 
 
 ####################
@@ -80,3 +85,10 @@ docker_common_options:
     KOLLA_CONFIG_STRATEGY: "{{ config_strategy }}"
   restart_policy: "{{ docker_restart_policy }}"
   restart_retries: "{{ docker_restart_policy_retry }}"
+
+
+####################
+# Dimensions options
+####################
+# Dimension options for Docker Containers
+default_container_dimensions: {}
