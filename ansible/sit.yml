@@ -39,5 +39,7 @@
     #    tags: docker}
     #- {role: chrony,
     #   tags: chrony}
+    - {role: interfaces,
+        tags: interfaces}
 
   
