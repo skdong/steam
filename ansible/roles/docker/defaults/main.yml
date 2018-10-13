@@ -1,4 +1,8 @@
 ---
+is_atomic: true
+
+docker_bin_dir: /usr/bin
+
 docker_version: 'latest'
 
 docker_package_info:
@@ -22,3 +26,5 @@ docker_container_storage_setup: false
 
 # Used to set docker daemon iptables options
 docker_iptables_enabled: "false"
+
+retry_stagger: 5

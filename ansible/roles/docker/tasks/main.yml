@@ -25,10 +25,10 @@
   register: docker_task_result
   until: docker_task_result|succeeded
   retries: 4
-  delay: "{{ retry_stagger | random + 3 }}"
+  #delay: "{{ retry_stagger | random + 3 }}"
   with_items: "{{ docker_package_info.pkgs }}"
   notify: restart docker
-  when: not (ansible_os_family in ["CoreOS", "Container Linux by CoreOS"] or is_atomic) and (docker_package_info.pkgs|length > 0)
+  when:  (docker_package_info.pkgs|length > 0)
 
 - name: ensure service is started if docker packages are already present
   service:
@@ -43,14 +43,6 @@
   command: "docker version -f '{{ '{{' }}.Client.Version{{ '}}' }}'"
   register: installed_docker_version
   changed_when: false
-
-- name: check minimum docker version for docker_dns mode. You need at least docker version >= 1.12 for resolvconf_mode=docker_dns
-  fail:
-    msg: "You need at least docker version >= 1.12 for resolvconf_mode=docker_dns"
-  when: >
-        dns_mode != 'none' and
-        resolvconf_mode == 'docker_dns' and
-        installed_docker_version.stdout|version_compare('1.12', '<')
 
 - name: Set docker systemd config
   import_tasks: systemd.yml
