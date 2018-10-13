@@ -7,12 +7,6 @@ docker_kernel_min_version: '0'
 # or do 'yum --showduplicates list docker-engine'
 docker_versioned_pkg:
   'latest': docker-ce
-  '1.11': docker-engine-1.11.2-1.el7.centos
-  '1.12': docker-engine-1.12.6-1.el7.centos
-  '1.13': docker-engine-1.13.1-1.el7.centos
-  '17.03': docker-ce-17.03.2.ce-1.el7.centos
-  'stable': docker-ce-17.03.2.ce-1.el7.centos
-  'edge': docker-ce-17.12.1.ce-1.el7.centos
 
 
 docker_package_info:
@@ -21,10 +15,3 @@ docker_package_info:
     - name: "{{ docker_versioned_pkg[docker_version | string] }}"
       yum_conf: "{{ docker_yum_conf }}"
 
-docker_repo_key_info:
-  pkg_key: ''
-  repo_keys: []
-
-docker_repo_info:
-  pkg_repo: ''
-  repos: []
