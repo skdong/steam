@@ -1,0 +1,7 @@
+- parted:
+    device: '/dev/{{item}}'
+    label: '{{ osd_label }}'
+    name: '{{ osd_name }}'
+    state: present
+    number: 1
+  with_items: "{{ osd_devices }}"

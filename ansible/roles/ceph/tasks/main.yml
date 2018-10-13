@@ -1,0 +1,3 @@
+---
+- name: init osd
+  include: osd.yml

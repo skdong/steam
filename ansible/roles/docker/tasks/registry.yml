@@ -1,0 +1,10 @@
+---
+- name: Make Registry Crt Dir
+  file:
+    dest: '/etc/docker/certs.d/{{ docker_registry }}'
+    state: directory
+
+- name: Post Client Registry CRT File
+  get_url:
+    url: '{{ certs_repo_url }}/keystore.crt'
+    dest: '/etc/docker/certs.d/{{ docker_registry }}'
