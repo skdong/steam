@@ -1,25 +1,12 @@
 ---
-
 - name: Add the OS specific varibles
   include_vars: "{{ ansible_os_family }}.yml"
 
 - name: install pkgs
   include: install.yml
 
-- name: Make sure the include line is there in interfaces file
-  lineinfile:
-    regexp: "^source\ \/etc\/network\/interfaces.d\/\*"
-    line: "source /etc/network/interfaces.d/*"
-    dest: /etc/network/interfaces
-    state: present
-    insertafter: EOF
-  when: ansible_os_family == "Debian"
-
-- name: Create the directory for interface cfg files
-  file:
-    path: /etc/network/interfaces.d
-    state: directory
-  when: ansible_os_family == "Debian"
+- name: set config
+  include: config.yml
 
 - name: set ethernet
   include: ethernet.yml
@@ -29,4 +16,3 @@
 
 - name: set bond
   include: bond.yml
-
