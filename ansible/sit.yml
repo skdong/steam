@@ -29,5 +29,7 @@
   roles:
     - {role: python,
        tags: python }
+    - {role: firewall,
+       tags: firewall}
 
   
