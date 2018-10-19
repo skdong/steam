@@ -1,0 +1,8 @@
+---
+- name: Set Ubuntu Dns Server
+  include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Set Centos Dns Server
+  include: centos.yml
+  when: ansible_distribution == 'CentOS'

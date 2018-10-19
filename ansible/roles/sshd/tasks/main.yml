@@ -1,0 +1,14 @@
+---
+- name: Get sshd DNS stat
+  shell: 'grep "^UseDNS *no" /etc/ssh/sshd_config'
+  register: dns_enable
+  ignore_errors: True
+
+- name: disable sshd dns
+  shell: sed -i '$a\UseDNS no' /etc/ssh/sshd_config
+  when: dns_enable.failed
+  notify:
+    - restart sshd
+
+- name: flush handlers
+  meta: flush_handlers

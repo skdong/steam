@@ -5,6 +5,10 @@
 - name: install pkgs
   include: install.yml
 
+- name: reflush network server
+  include: flushnetwork.yml
+  when: ansible_os_family == 'RedHat'
+
 - name: set config
   include: config.yml
 

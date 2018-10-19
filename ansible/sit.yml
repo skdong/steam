@@ -1,45 +1,28 @@
 ---
-- name: Gather facts for all hosts
-  gather_facts: false
-  hosts: baremetal
-  vars:
-    ansible_python_interpreter: '/usr/bin/python3'
-  tasks:
-    - setup:
-  tags: always
-
 - name: init env
   gather_facts: false
   hosts:
-    - baremetal
-  vars:
-    ansible_python_interpreter: '/usr/bin/python3'
+    - all
   roles: 
-    #- {role: user,
-    #   tags: user }
-    #- {role: repository,
-    #   tags: repository }
-    #- {role: hosts,
-    #   tags: hosts }
+    - {role: init, tags: always, action: begin }
+    - {role: sshd, tags: sshd }
+    - {role: repository, tags: repository }
+    - {role: init, tags: always, state: end }
+
 
 - name: init os
   gather_facts: false
   hosts:
-    - baremetal
-  vars:
-    kolla_action: deploy
+    - all
   roles:
-    #- {role: python,
-    #   tags: python }
-    #- {role: firewall,
-    #   tags: firewall}
-    - {role: ceph,
-        tags: ceph}
-    #- {role: docker,
-    #    tags: docker}
-    #- {role: chrony,
-    #   tags: chrony}
-    - {role: interfaces,
-        tags: interfaces}
+    - {role: hosts, tags: hosts }
+    - {role: dns, tags: dns }
+    - {role: user, tags: user }
+    - {role: python, tags: python }
+    - {role: firewall, tags: firewall}
+    - {role: ceph, tags: ceph}
+    - {role: docker, tags: docker}
+    - {role: chrony, tags: chrony, kolla_action: deploy}
+    - {role: interfaces, tags: interfaces}
 
   

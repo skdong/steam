@@ -1,0 +1,4 @@
+---
+- name: init deploy
+  include: '{{action}}.yml'
+

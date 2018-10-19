@@ -1,0 +1,11 @@
+---
+- name: set python3
+  include_vars: python3.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: disable selinux
+  shell: 'setenforce 0'
+  when: ansible_distribution == 'CentOS'
+
+- name: get setup
+  setup:

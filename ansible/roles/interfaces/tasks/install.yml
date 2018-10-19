@@ -1,13 +1,14 @@
+---
 - name: Install the required  packages in Redhat derivatives
   yum:
-    name: {{ item }}
+    name: '{{ item }}'
     state: installed
-  with_items: network_pkgs
+  with_items: '{{network_pkgs}}'
   when: ansible_os_family == 'RedHat'
 
 - name: Install the required packages in Debian derivatives
   apt:
-    name: {{ item }}
+    name: '{{ item }}'
     state: installed
     update_cache: yes
   with_items: '{{network_pkgs}}'

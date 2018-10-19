@@ -3,26 +3,26 @@
   file:
     path: /etc/yum.repos.d/
     state: absent
-  become: True
 
 - name: Ensure yum repos directory exists
   file:
     path: /etc/yum.repos.d/
     state: directory
     recurse: yes
-  become: True
 
-- name: Enable steam repo yum
-  become: True
-  template:
-    src: steam_yum_repo.j2
-    dest: /etc/yum.repos.d/steam.repo
+- name: add steam repo yum
+  shell: |
+      echo "[steam-repo]
+      name=Docker main Repository
+      baseurl={{yum_repo_url}}
+      enabled=1
+      gpgcheck=0" > /etc/yum.repos.d/steam.repo
 
-- name: yum update
+- name: yum update cache
   yum:
     update_cache: yes
 
 - name: install rehat package
   yum:
     name: '{{item}}'
-  with_items: '{{debian_pkg_install}}'
+  with_items: '{{redhat_pkg_install}}'

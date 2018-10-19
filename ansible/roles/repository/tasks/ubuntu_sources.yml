@@ -22,7 +22,7 @@
   apt_key:
     url: '{{certs_repo_url}}/bjzdgt_ubuntu_2018.pub'
 
-- name: Enable vapor source
+- name: Enable steam source
   template:
     src: steam_sources.list.j2
     dest: /etc/apt/sources.list.d/steam_sources.list
@@ -36,4 +36,3 @@
     name: '{{item}}'
   with_items: '{{debian_pkg_install}}'
  
-

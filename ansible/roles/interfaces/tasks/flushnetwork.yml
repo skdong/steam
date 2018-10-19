@@ -1,0 +1,9 @@
+---
+- name: restart dbus
+  systemd:
+    name: dbus
+    state: restarted
+  with_items:
+    - dubs
+    - NetworkManager
+    - network

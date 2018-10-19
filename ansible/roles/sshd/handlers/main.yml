@@ -1,0 +1,3 @@
+---
+- name: restart sshd
+  shell: 'systemctl restart sshd'

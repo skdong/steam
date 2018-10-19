@@ -1,0 +1,10 @@
+---
+- name:
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolvconf/resolv.conf.d/head
+
+- name: Restart Resolvconf
+  service:
+    name: "resolvconf"
+    state: restarted

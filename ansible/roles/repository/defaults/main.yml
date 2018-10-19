@@ -4,5 +4,7 @@ debian_pkg_install:
   - python-pip
 
 redhat_pkg_install:
-  - git
   - python2-pip
+  - git
+  - libselinux-python
+  - vim

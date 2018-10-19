@@ -9,7 +9,7 @@
 
 - name: Make sure the bonding module is loaded
   modprobe:
-     name: bonding
+    name: bonding
     state: present
   when: bond_result|changed
 
