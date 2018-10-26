@@ -1,5 +1,5 @@
 ---
-- name: restart dbus
+- name: restart network
   systemd:
     name: dbus
     state: restarted
@@ -8,3 +8,4 @@
     - NetworkManager
     - network
     - systemd-logind
+  when: ansible_os_family == 'RedHat'

@@ -1,0 +1,11 @@
+---
+- name: disable selinux
+  selinux:
+    state: disabled
+  when: ansible_distribution == 'CentOS'
+
+- name: reboot
+  command: 'reboot -f'
+  when:
+    - inventory_hostname in group['new']
+    - reset_network_force

@@ -7,10 +7,9 @@
 
 - name: reflush network server
   include: flushnetwork.yml
-  when: ansible_os_family == 'RedHat'
 
-- name: set config
-  include: config.yml
+- name: clean os network options
+  include: clean.yml
 
 - name: set ethernet
   include: ethernet.yml
@@ -20,3 +19,4 @@
 
 - name: set bond
   include: bond.yml
+

@@ -1,0 +1,24 @@
+---
+- name: overide interfaces
+  copy:
+    path: interfaces
+    dest: /etc/network/interfaces
+  when: ansible_os_family == "Debian"
+
+- name: delete debian interfaces config files
+  shell: 'rm -rf /etc/network/interfaces.d/*'
+  when:
+    - ansible_os_family == "Debian"
+    - reset_network_force
+
+- name: delete redhat interface config files
+  shell: 'rm -rf /etc/sysconfig/network-scripts/ifcfg-*'
+  when:
+    - ansible_os_family == "RedHat"
+    - reset_network_force
+
+- name: Create the directory for interface cfg files
+  file:
+    path: /etc/network/interfaces.d
+    state: directory
+  when: ansible_os_family == "Debian"

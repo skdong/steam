@@ -4,8 +4,8 @@
     - all
   roles:
     - {role: sshd, tags: sshd}
-    - {role: init, kolla_action: deploy}
     - {role: facts, tags: always}
+    - {role: init, kolla_action: deploy}
     - {role: repository, when: inventory_hostname in groups['new'] }
     - {role: interfaces, tags: interfaces,
         when: inventory_hostname in groups['new']}
@@ -18,5 +18,4 @@
     - {role: firewall, tags: firewall}
     - {role: ceph, tags: ceph}
     - {role: chrony, tags: chrony, kolla_action: deploy}
-
-
+    - {role: post}

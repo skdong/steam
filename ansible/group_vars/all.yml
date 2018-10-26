@@ -100,3 +100,9 @@ docker_common_options:
 ####################
 # Dimension options for Docker Containers
 default_container_dimensions: {}
+
+
+#########
+# Network
+#########
+reset_network_force: false
