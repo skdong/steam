@@ -1,0 +1,9 @@
+--
+- name: load vars
+  include_vas: python3.yml
+  when:
+    - inventory_hostname in groups['ubuntu']
+    - inventory_hostname in groups['new']
+
+- name: gather facts
+  setup:

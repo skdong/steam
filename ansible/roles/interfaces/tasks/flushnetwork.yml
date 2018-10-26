@@ -7,3 +7,4 @@
     - dubs
     - NetworkManager
     - network
+    - systemd-logind

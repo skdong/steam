@@ -1,0 +1,10 @@
+---
+- name: disable selinux
+  shell: 'setenforce 0'
+  when: ansible_distribution == 'CentOS'
+
+- name: config
+  include: config.yml
+
+- name: Flush handlers
+  meta: flush_handlers

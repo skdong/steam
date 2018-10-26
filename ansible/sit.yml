@@ -1,28 +1,22 @@
 ---
-- name: init env
-  gather_facts: false
-  hosts:
-    - all
-  roles: 
-    - {role: init, tags: always, action: begin }
-    - {role: sshd, tags: sshd }
-    - {role: repository, tags: repository }
-    - {role: init, tags: always, state: end }
-
-
-- name: init os
-  gather_facts: false
+- name: update os
   hosts:
     - all
   roles:
+    - {role: sshd, tags: sshd}
+    - {role: init, kolla_action: deploy}
+    - {role: facts, tags: always}
+    - {role: repository, when: inventory_hostname in groups['new'] }
+    - {role: interfaces, tags: interfaces,
+        when: inventory_hostname in groups['new']}
+    - {role: docker, tags: docker,
+        when: inventory_hostname in groups['new']}
     - {role: hosts, tags: hosts }
     - {role: dns, tags: dns }
     - {role: user, tags: user }
     - {role: python, tags: python }
     - {role: firewall, tags: firewall}
     - {role: ceph, tags: ceph}
-    - {role: docker, tags: docker}
     - {role: chrony, tags: chrony, kolla_action: deploy}
-    - {role: interfaces, tags: interfaces}
 
-  
+

@@ -1,4 +1,6 @@
-- parted:
+---
+- name: parte osd
+  parted:
     device: '/dev/{{item}}'
     label: '{{ osd_label }}'
     name: '{{ osd_name }}'

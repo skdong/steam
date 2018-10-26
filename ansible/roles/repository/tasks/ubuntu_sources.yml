@@ -35,4 +35,7 @@
   apt:
     name: '{{item}}'
   with_items: '{{debian_pkg_install}}'
- 
+
+- name: set python
+  include_vars: python.yml
+  when: inventory_hostname in groups['new']

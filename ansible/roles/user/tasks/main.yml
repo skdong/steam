@@ -17,6 +17,7 @@
     state: present
     group: "{{ kolla_group }}"
     groups: "sudo"
+    shell: "/bin/bash"
     append: true
   become: True
   when: create_kolla_user | bool

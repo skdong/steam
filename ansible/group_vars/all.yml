@@ -1,4 +1,9 @@
 ---
+###################
+# steam options
+###################
+# cluster domain
+cluster_domain: stack.dire.com
 
 ###################
 # Kolla options
@@ -30,6 +35,9 @@ kolla_install_type: "binary"
 config_owner_user: "dire"
 config_owner_group: "dire"
 
+# The default kolla action
+kolla_action: "config"
+
 
 ####################
 # OpenStack options
@@ -40,7 +48,7 @@ openstack_release: "queens"
 #################
 # respostory url
 #################
-deploy_host: deploy.stack.slancer
+deploy_host: 'deploy.{{cluster_domain}}'
 certs_repo_host: '{{deploy_host}}'
 apt_repo_host: '{{deploy_host}}'
 yum_repo_host: '{{deploy_host}}'

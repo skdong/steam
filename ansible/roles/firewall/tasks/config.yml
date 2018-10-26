@@ -1,0 +1,23 @@
+- name: Set firewall default policy
+  ufw:
+    state: disabled
+    policy: allow
+  when: ansible_os_family == 'Debian'
+  ignore_errors: yes
+
+- name: Check if firewalld is installed
+  command: rpm -q firewalld
+  register: firewalld_check
+  failed_when: firewalld_check.rc > 1
+  when: ansible_os_family == 'RedHat'
+
+- name: Disable firewalld
+  service:
+    name: "{{ item }}"
+    enabled: false
+    state: stopped
+  with_items:
+    - firewalld
+  when:
+    - ansible_os_family == 'RedHat'
+    - firewalld_check.rc == 0
