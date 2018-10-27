@@ -1,3 +1,6 @@
 ---
 - name: restart sshd
-  shell: 'systemctl restart sshd'
+  block:
+    - shell: 'systemctl restart sshd'
+    - shell: 'systemctl restart systemd-logind'
+      ignore_errors: yes
