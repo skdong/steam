@@ -15,7 +15,8 @@
     dest: /etc/hosts
     marker: "# {mark} ANSIBLE GENERATED HOSTS"
     block: |
-        {% for host in groups['baremetal'] %}
+        {{ deploy_ip }} {{ deploy_host }}
+        {% for host in groups['all'] %}
         {{ hostvars[host]['ansible_host']}} {{ hostvars[host]['ansible_hostname'] }}
         {% endfor %}
     create: true

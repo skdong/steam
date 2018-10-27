@@ -1,6 +1,6 @@
---
+---
 - name: load vars
-  include_vas: python3.yml
+  include_vars: python3.yml
   when:
     - inventory_hostname in groups['ubuntu']
     - inventory_hostname in groups['new']

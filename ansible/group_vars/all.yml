@@ -3,7 +3,7 @@
 # steam options
 ###################
 # cluster domain
-cluster_domain: stack.dire.com
+cluster_domain: mydomain.com
 
 ###################
 # Kolla options
@@ -48,6 +48,7 @@ openstack_release: "queens"
 #################
 # respostory url
 #################
+deploy_ip: '10.0.35.21'
 deploy_host: 'deploy.{{cluster_domain}}'
 certs_repo_host: '{{deploy_host}}'
 apt_repo_host: '{{deploy_host}}'

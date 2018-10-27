@@ -1,7 +1,7 @@
 ---
 - name: overide interfaces
   copy:
-    path: interfaces
+    src: interfaces
     dest: /etc/network/interfaces
   when: ansible_os_family == "Debian"
 

@@ -2,15 +2,16 @@
 - name: update os
   hosts:
     - all
+  become: true
   roles:
     - {role: sshd, tags: sshd}
     - {role: facts, tags: always}
     - {role: init, kolla_action: deploy}
-    - {role: repository, when: inventory_hostname in groups['new'] }
+    - {role: repository, when: inventory_hostname in groups.new }
     - {role: interfaces, tags: interfaces,
-        when: inventory_hostname in groups['new']}
+        when: inventory_hostname in groups.new}
     - {role: docker, tags: docker,
-        when: inventory_hostname in groups['new']}
+        when: inventory_hostname in groups.new}
     - {role: hosts, tags: hosts }
     - {role: dns, tags: dns }
     - {role: user, tags: user }
