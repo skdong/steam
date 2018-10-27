@@ -5,7 +5,9 @@
   when: ansible_distribution == 'CentOS'
 
 - name: reboot
-  command: 'reboot -f'
+  reboot:
+    reboot_timeout: 1200
   when:
     - inventory_hostname in group['new']
     - reset_network_force
+
