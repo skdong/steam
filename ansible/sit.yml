@@ -4,10 +4,11 @@
     - all
   become: true
   roles:
-    - {role: sshd, tags: sshd}
-    - {role: facts, tags: always}
-    - {role: init, kolla_action: deploy}
-    - {role: repository, when: inventory_hostname in groups.new }
+    - {role: sshd, tags: sshd }
+    - {role: facts, tags: always }
+    - {role: init, kolla_action: deploy, tags: init }
+    - {role: repository, tags: repository,
+        when: inventory_hostname in groups.new }
     - {role: interfaces, tags: interfaces,
         when: inventory_hostname in groups.new}
     - {role: docker, tags: docker,
@@ -16,8 +17,8 @@
     - {role: dns, tags: dns }
     - {role: user, tags: user }
     - {role: python, tags: python }
-    - {role: firewall, tags: firewall}
-    - {role: ceph, tags: ceph}
-    - {role: chrony, tags: chrony, kolla_action: deploy}
-    - {role: timezone }
-    - {role: post}
+    - {role: firewall, tags: firewall }
+    - {role: ceph, tags: ceph }
+    - {role: chrony, kolla_action: deploy, tags: chrony }
+    - {role: timezone, tags: timezone }
+    - {role: post, tags: post }
