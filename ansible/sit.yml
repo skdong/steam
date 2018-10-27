@@ -19,4 +19,5 @@
     - {role: firewall, tags: firewall}
     - {role: ceph, tags: ceph}
     - {role: chrony, tags: chrony, kolla_action: deploy}
+    - {role: timezone }
     - {role: post}
