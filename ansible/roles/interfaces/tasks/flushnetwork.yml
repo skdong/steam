@@ -4,8 +4,8 @@
     name: '{{ item }}'
     state: restarted
   with_items:
-    - dubs
+    - dbus
+    - systemd-logind
     - NetworkManager
     - network
-    - systemd-logind
   when: ansible_os_family == 'RedHat'
