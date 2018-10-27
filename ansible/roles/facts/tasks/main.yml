@@ -1,9 +1,6 @@
 ---
-- name: load vars
-  include_vars: python3.yml
-  when:
-    - inventory_hostname in groups['ubuntu']
-    - inventory_hostname in groups['new']
+- name: set python
+  include: python
 
 - name: gather facts
   setup:

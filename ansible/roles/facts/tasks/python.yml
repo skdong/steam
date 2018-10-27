@@ -1,0 +1,22 @@
+---
+- name: get python state
+  shell: 'which python'
+  ignore_errors: yes
+  register: python_state
+
+- name: get python3 state
+  shell: 'which python3'
+  ignore_errors: yes
+  register: python3_state
+
+- name: load vars
+  include_vars: python3.yml
+  when:
+    - python_state | failed
+    - python3_state
+
+- fail:
+    msg: "node not install python2 or python3, please install python2 or python3 pre"
+  when:
+    - python_state | failed
+    - python3_state | failed
