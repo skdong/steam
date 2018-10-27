@@ -6,8 +6,7 @@
 
 - name: reboot
   reboot:
-    reboot_timeout: 1200
   when:
-    - inventory_hostname in group['new']
+    - inventory_hostname in groups['new']
     - reset_network_force
 

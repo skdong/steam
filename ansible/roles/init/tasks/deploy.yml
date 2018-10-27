@@ -2,6 +2,7 @@
 - name: disable selinux
   shell: 'setenforce 0'
   when: ansible_distribution == 'CentOS'
+  ignore_errors: yes
 
 - name: config
   include: config.yml
