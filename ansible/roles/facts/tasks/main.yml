@@ -1,6 +1,6 @@
 ---
 - name: set python
-  include: python
+  include: python.yml
 
 - name: gather facts
   setup:
