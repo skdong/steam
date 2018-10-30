@@ -5,7 +5,7 @@
   become: true
   roles:
     - {role: sshd, tags: sshd }
-    - {role: facts, tags: always }
+    - {role: facts, tags: facts }
     - {role: init, kolla_action: deploy, tags: init }
     - {role: repository, tags: repository,
         when: inventory_hostname in groups.new }

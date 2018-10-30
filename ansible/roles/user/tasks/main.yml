@@ -16,7 +16,7 @@
     name: "{{ kolla_user }}"
     state: present
     group: "{{ kolla_group }}"
-    groups: "sudo"
+    groups: "sudo,docker"
     shell: "/bin/bash"
     append: true
   become: True
@@ -42,6 +42,15 @@
     state: present
     regexp: '^{{ kolla_user }}'
     line: '{{ kolla_user }} ALL=(ALL) NOPASSWD: ALL'
+  become: True
+  when: create_kolla_user_sudoers | bool
+
+- name: Grant sudo group no tty
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^Defaults.*requiretty$'
+    line: 'Defaults:%sudo !requiretty'
   become: True
   when: create_kolla_user_sudoers | bool
 
