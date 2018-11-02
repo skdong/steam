@@ -29,6 +29,15 @@
   become: True
   when: create_kolla_user | bool
 
+- name: Add id_rsa
+  copy:
+    path: "/home/{{ kolla_user }}/.ssh/id_rsa"
+    content: '{{kolla_ssh_key.private_key }}'
+    owner: '{{ kolla_user }}'
+    group: '{{ kolla_group }}'
+    mode: 0600
+    create: True
+
 - name: Create sudoers profile for user kolla
   file:
     path: /etc/sudoers.d/kolla-ansible-users
