@@ -8,13 +8,13 @@
         when: inventory_hostname in groups.new }
     - {role: facts, tags: always }
     - {role: init, kolla_action: deploy, tags: init }
+    - {role: hosts, tags: hosts }
     - {role: repository, tags: repository,
         when: inventory_hostname in groups.new }
     - {role: interfaces, tags: interfaces,
         when: inventory_hostname in groups.new}
     - {role: docker, tags: docker,
         when: inventory_hostname in groups.new}
-    - {role: hosts, tags: hosts }
     - {role: dns, tags: dns }
     - {role: user, tags: user }
     - {role: python, tags: python }
