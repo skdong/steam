@@ -8,3 +8,4 @@ redhat_pkg_install:
   - git
   - libselinux-python
   - vim
+  - bash-completion
