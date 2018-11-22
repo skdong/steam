@@ -1,0 +1,15 @@
+---
+- name: get device parted info
+  parted:
+    device: '/dev/{{ osd_device }}'
+    state: info
+  register: result
+
+- name: parted device
+  parted:
+    device: '/dev/{{ osd_device }}'
+    label: '{{ osd_label }}'
+    name: '{{ osd_name }}'
+    state: present
+    number: 1
+  when: result.partitions | length == 0
