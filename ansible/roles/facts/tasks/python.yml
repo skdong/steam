@@ -1,11 +1,11 @@
 ---
 - name: get python state
-  shell: 'which python'
+  raw: 'which python'
   ignore_errors: yes
   register: python_state
 
 - name: get python3 state
-  shell: 'which python3'
+  raw: 'which python3'
   ignore_errors: yes
   register: python3_state
 

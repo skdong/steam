@@ -1,4 +1,6 @@
 ---
+- include: hosts.yml
+
 - name: remove yum repo
   include: centos_repo.yml
   when: ansible_os_family == 'RedHat'

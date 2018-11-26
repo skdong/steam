@@ -4,13 +4,13 @@
     - all
   become: true
   roles:
+    - {role: facts, tags: always }
     - {role: sshd, tags: sshd ,
         when: inventory_hostname in groups.new }
-    - {role: facts, tags: always }
     - {role: init, kolla_action: deploy, tags: init }
-    - {role: hosts, tags: hosts }
     - {role: repository, tags: repository,
         when: inventory_hostname in groups.new }
+    - {role: hosts, tags: hosts }
     - {role: interfaces, tags: interfaces,
         when: inventory_hostname in groups.new}
     - {role: docker, tags: docker,
