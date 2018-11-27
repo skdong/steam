@@ -28,3 +28,5 @@ docker_container_storage_setup: false
 docker_iptables_enabled: "false"
 
 retry_stagger: 5
+
+docker_default_network: '192.168.0.1/16'

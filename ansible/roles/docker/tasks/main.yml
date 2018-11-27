@@ -47,6 +47,12 @@
 - name: Set docker systemd config
   import_tasks: systemd.yml
 
+- name: Write docker daemon
+  template:
+    src: daemon.json.j2
+    dest: "/etc/docker/daemon.json"
+  notify: restart docker
+
 - name: ensure docker service is started and enabled
   service:
     name: "{{ item }}"
