@@ -3,6 +3,7 @@
   hosts:
     - all
   become: true
+  gather_facts: false
   roles:
     - {role: facts, tags: always }
     - {role: sshd, tags: sshd ,
