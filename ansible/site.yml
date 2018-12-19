@@ -18,7 +18,8 @@
         when: inventory_hostname in groups.new}
     - {role: dns, tags: dns }
     - {role: user, tags: user }
-    - {role: python, tags: python }
+    - {role: python, tags: python,
+        when: inventory_hostname in groups.new}
     - {role: firewall, tags: firewall }
     - {role: ceph, tags: ceph }
     - {role: chrony, kolla_action: deploy, tags: chrony }
