@@ -1,4 +1,19 @@
 ---
+- name: Stop network for bond devices
+  systemd:
+    name: NetworkManager
+    state: restarted
+  when: network_bond_interfaces is defined and ansible_os_family == 'RedHat'
+  ignore_errors: yes
+
+- name: Disable network for bond devices
+  systemd:
+    name: NetworkManager
+    enabled: no
+    masked: yes
+  when: network_bond_interfaces is defined and ansible_os_family == 'RedHat'
+  ignore_errors: yes
+
 - name: Create the network configuration file for bond devices
   template:
     src: 'bond_{{ ansible_os_family }}.j2'
