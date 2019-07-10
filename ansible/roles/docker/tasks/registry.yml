@@ -4,12 +4,14 @@
     dest: '/etc/docker/certs.d/{{ docker_registry }}'
     state: directory
 
-#- name: Post Client Registry CRT File
-#  get_url:
-#    url: '{{ certs_repo_url }}/keystore.crt'
-#    dest: '/etc/docker/certs.d/{{ docker_registry }}'
-
-- name: Copy ca.crt
-  template:
-    src: '{{ germ_path }}/etc/germ/ca.crt'
+- name: Post Client Registry CRT File
+  get_url:
+    url: '{{ certs_repo_url }}/keystore.crt'
     dest: '/etc/docker/certs.d/{{ docker_registry }}'
+  when: not external_docker_registry_enabled
+
+- name: Copy external docker registry crt file
+  copy:
+    src: '{{ germ_path }}/etc/germ/{{ docker_registry_crt_name }}'
+    dest: '/etc/docker/certs.d/{{ docker_registry }}/{{ docker_registry_crt_name }}'
+  when: external_docker_registry_enabled
