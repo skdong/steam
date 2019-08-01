@@ -1,4 +1,7 @@
 ---
+action: init
+external_docker_registry_enabled: false
+
 debian_pkg_install:
   - git
   - python-pip

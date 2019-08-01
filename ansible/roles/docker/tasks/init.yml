@@ -1,0 +1,65 @@
+---
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version|lower|replace('/', '_') }}.yml"
+        - "{{ ansible_distribution|lower }}.yml"
+        - "{{ ansible_os_family|lower }}.yml"
+        - defaults.yml
+      paths:
+        - ../vars
+      skip: true
+  tags:
+    - facts
+
+- name: ensure docker packages are installed
+  action: "{{ docker_package_info.pkg_mgr }}"
+  args:
+    pkg: "{{item.name}}"
+    force: "{{item.force|default(omit)}}"
+    conf_file: "{{item.yum_conf|default(omit)}}"
+    state: present
+  register: docker_task_result
+  until: docker_task_result|succeeded
+  retries: 4
+  delay: "{{ retry_stagger | random + 3 }}"
+  with_items: "{{ docker_package_info.pkgs }}"
+  notify: restart docker
+  when:  (docker_package_info.pkgs|length > 0)
+
+- name: ensure service is started if docker packages are already present
+  service:
+    name: docker
+    state: started
+  when: docker_task_result is not changed
+
+- name: flush handlers so we can wait for docker to come up
+  meta: flush_handlers
+
+- name: set fact for docker_version
+  command: "docker version -f '{{ '{{' }}.Client.Version{{ '}}' }}'"
+  register: installed_docker_version
+  changed_when: false
+
+- name: Set docker systemd config
+  import_tasks: systemd.yml
+
+- name: Write docker daemon
+  template:
+    src: daemon.json.j2
+    dest: "/etc/docker/daemon.json"
+  notify: restart docker
+
+- name: ensure docker service is started and enabled
+  service:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  with_items:
+    - docker
+
+- name: add docker registry cert
+  include: registry.yml
